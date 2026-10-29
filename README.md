@@ -1,3 +1,15 @@
+---
+title: Movie Recommender System
+emoji: 🎬
+colorFrom: red
+colorTo: indigo
+sdk: streamlit
+sdk_version: 1.40.0
+app_file: app.py
+pinned: false
+license: mit
+---
+
 # 🎬 Movie Recommender System
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)

@@ -18,6 +18,7 @@ st.set_page_config(
 # ── Constants & Configuration ────────────────────────────────────────────────
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, "model")
+DATA_DIR = os.path.join(BASE_DIR, "data")
 MOVIE_LIST_PATH = os.path.join(MODEL_DIR, "movie_list.pkl")
 SIMILARITY_PATH = os.path.join(MODEL_DIR, "similarity.pkl")
 
@@ -38,10 +39,21 @@ PLACEHOLDER_POSTER = (
 )
 
 
-# ── Load Model & Data (Cached) ───────────────────────────────────────────────
+# ── Load Model & Data (Cached with auto-build fallback) ───────────────────────
 @st.cache_resource(show_spinner="Loading recommendation models...")
 def load_data():
     """Load precomputed movie list and cosine similarity matrix with safety checks."""
+    # If precomputed models are missing, attempt auto-generation from raw data if present
+    if not os.path.exists(MOVIE_LIST_PATH) or not os.path.exists(SIMILARITY_PATH):
+        movies_csv = os.path.join(DATA_DIR, "tmdb_5000_movies.csv")
+        credits_csv = os.path.join(DATA_DIR, "tmdb_5000_credits.csv")
+        if os.path.exists(movies_csv) and os.path.exists(credits_csv):
+            try:
+                from generate_model import build_model
+                build_model(data_dir=DATA_DIR, model_dir=MODEL_DIR)
+            except Exception:
+                pass
+
     if not os.path.exists(MOVIE_LIST_PATH) or not os.path.exists(SIMILARITY_PATH):
         return None, None
 
@@ -140,11 +152,11 @@ def main():
         if TMDB_API_KEY:
             st.success("API Key Active (Posters enabled)")
         else:
-            st.warning("API Key not found or default")
+            st.warning("API Key not configured")
             st.info(
-                "To display movie posters, add your free key to `.env`:\n\n"
+                "To display movie posters, add your TMDB API key in your `.env` or Hugging Face Space secrets:\n\n"
                 "```env\nTMDB_API_KEY=your_key_here\n```\n\n"
-                "Get one at [themoviedb.org](https://www.themoviedb.org/settings/api)."
+                "Get a free key at [themoviedb.org](https://www.themoviedb.org/settings/api)."
             )
 
         st.markdown("---")
