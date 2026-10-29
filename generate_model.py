@@ -9,6 +9,7 @@ import os
 import pickle
 import sys
 import time
+import numpy as np
 import pandas as pd
 from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import CountVectorizer
@@ -90,8 +91,8 @@ def build_model(data_dir="data", model_dir="model"):
     cv = CountVectorizer(max_features=5000, stop_words='english')
     vectors = cv.fit_transform(new_df['tags']).toarray()
 
-    print("7. Computing Cosine Similarity matrix...")
-    similarity = cosine_similarity(vectors)
+    print("7. Computing Cosine Similarity matrix (float16 for fast loading)...")
+    similarity = cosine_similarity(vectors).astype(np.float16)
 
     print(f"8. Saving artifacts to '{model_dir}/'...")
     os.makedirs(model_dir, exist_ok=True)

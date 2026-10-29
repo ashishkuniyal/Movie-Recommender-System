@@ -16,11 +16,10 @@ env/
 .env
 # .env.example is intentionally NOT ignored — it's a safe template
 
-# ── Model files (large binaries >100MB) ────────────────────────────────────────
-model/*.pkl
-!model/.gitkeep
+# ── Model files (tracked: ~44MB float16 fits GitHub's 100MB limit) ────────────
+# Precomputed models are committed so cloud platforms work out-of-the-box
 
-# ── Dataset (large CSVs) ──────────────────────────────────────────────────────
+# ── Dataset (raw CSVs) ────────────────────────────────────────────────────────
 data/*.csv
 !data/.gitkeep
 
