@@ -12,11 +12,14 @@ license: mit
 
 # 🎬 Movie Recommender System
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://movie-recommender-system-a72rdga7zesmada4si8vxx.streamlit.app)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.30%2B-FF4B4B?logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3%2B-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![Pandas](https://img.shields.io/badge/pandas-2.0%2B-150458?logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![TMDB API](https://img.shields.io/badge/TMDB-API%20v3-01d277?logo=themoviedatabase&logoColor=white)](https://www.themoviedb.org/settings/api)
+
+> 🚀 **Live Demo:** Try the app online at **[movie-recommender-system.streamlit.app](https://movie-recommender-system-a72rdga7zesmada4si8vxx.streamlit.app)**
 
 A content-based movie recommender system that suggests movies based on metadata similarity (plot overview, genres, keywords, top cast, and director). Built using Natural Language Processing (NLP), Bag-of-Words vectorization, Cosine Similarity, and an interactive Streamlit web interface integrated with the TMDB API for live poster art.
 
